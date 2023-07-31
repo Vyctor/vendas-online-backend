@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 
 import CreateUserDTO from './dtos/create-user.dto';
 import { UserEntity } from './entities/user.entity';
+import ReturnUserDto from './dtos/return-user.dto';
 
 @Injectable()
 export class UserService {
@@ -14,14 +15,15 @@ export class UserService {
   ) {}
 
   async createUser(createUserDto: CreateUserDTO): Promise<UserEntity> {
-    const salt = 1000;
+    const salt = 12;
     const hashedPassword = await hash(createUserDto.password, salt);
     createUserDto.password = hashedPassword;
     createUserDto['typeUser'] = 1;
-    return this.userRepository.create(createUserDto);
+    return this.userRepository.save(createUserDto);
   }
 
-  async getAllUsers(): Promise<UserEntity[]> {
-    return this.userRepository.find();
+  async getAllUsers(): Promise<ReturnUserDto[]> {
+    const userEntities = await this.userRepository.find();
+    return userEntities.map((entity) => new ReturnUserDto(entity));
   }
 }
