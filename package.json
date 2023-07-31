@@ -21,12 +21,14 @@
     "migration:create": "npx typeorm migration:create -n"
   },
   "dependencies": {
+    "@nestjs/cache-manager": "^2.1.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.2",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
     "bcrypt": "^5.1.0",
+    "cache-manager": "^5.2.3",
     "pg": "^8.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
